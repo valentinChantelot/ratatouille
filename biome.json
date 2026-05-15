@@ -1,0 +1,164 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.14/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["**", "!!**/node_modules", "!!**/dist"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80,
+    "lineEnding": "lf"
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error",
+        "useExhaustiveDependencies": "error",
+        "useHookAtTopLevel": "error",
+        "noInvalidUseBeforeDeclaration": "error",
+        "noUndeclaredVariables": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noConsole": "warn",
+        "noDoubleEquals": "error",
+        "noArrayIndexKey": "error",
+        "noImplicitAnyLet": "error",
+        "noShadowRestrictedNames": "error",
+        "useIsArray": "error"
+      },
+      "style": {
+        "useNamingConvention": {
+          "level": "error",
+          "options": {
+            "strictCase": false,
+            "conventions": [
+              {
+                "selector": { "kind": "typeAlias" },
+                "formats": ["PascalCase"]
+              },
+              {
+                "selector": { "kind": "interface" },
+                "formats": ["PascalCase"]
+              },
+              {
+                "selector": { "kind": "typeParameter" },
+                "formats": ["PascalCase"]
+              },
+              {
+                "selector": { "kind": "enum" },
+                "formats": ["PascalCase"]
+              },
+              {
+                "selector": { "kind": "enumMember" },
+                "formats": ["CONSTANT_CASE"]
+              },
+
+              {
+                "selector": { "kind": "class" },
+                "formats": ["PascalCase"]
+              },
+              {
+                "selector": { "kind": "classProperty" },
+                "formats": ["camelCase"]
+              },
+              {
+                "selector": { "kind": "classMethod" },
+                "formats": ["camelCase"]
+              },
+
+              {
+                "selector": { "kind": "function" },
+                "match": "use[A-Z][a-zA-Z0-9]*",
+                "formats": ["camelCase"]
+              },
+              {
+                "selector": { "kind": "variable" },
+                "match": "use[A-Z][a-zA-Z0-9]*",
+                "formats": ["camelCase"]
+              },
+
+              {
+                "selector": { "kind": "function" },
+                "formats": ["camelCase", "PascalCase"]
+              },
+
+              {
+                "selector": { "kind": "variable" },
+                "formats": ["PascalCase", "camelCase", "CONSTANT_CASE"]
+              }
+            ]
+          }
+        },
+        "noNonNullAssertion": "error",
+        "useConst": "error",
+        "useSingleVarDeclarator": "error",
+        "useTemplate": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "useDefaultParameterLast": "error",
+        "noParameterAssign": "error"
+      },
+      "complexity": {
+        "noBannedTypes": "error",
+        "noUselessTypeConstraint": "error",
+        "noExcessiveCognitiveComplexity": {
+          "level": "warn",
+          "options": { "maxAllowedComplexity": 15 }
+        },
+        "useSimplifiedLogicExpression": "warn"
+      },
+      "performance": {
+        "noDelete": "warn"
+      },
+      "a11y": {
+        "useAltText": "error",
+        "useButtonType": "error",
+        "noAutofocus": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "error"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "all",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "bracketSpacing": true,
+      "bracketSameLine": false
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["*.config.ts", "*.config.js", "vite.config.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          }
+        }
+      }
+    }
+  ]
+}
