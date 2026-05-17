@@ -13,7 +13,8 @@
     "preview": "vite preview",
     "check": "biome check --write .",
     "lint": "biome lint .",
-    "format": "biome format --write ."
+    "format": "biome format --write .",
+    "prepare": "[ -d .git ] && git config core.hooksPath .githooks || true"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.100.9",

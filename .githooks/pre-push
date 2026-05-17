@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ ! -x node_modules/.bin/tsc ]]; then
+  echo "pre-push: TypeScript not found — run 'pnpm install' first" >&2
+  exit 1
+fi
+
+echo "pre-push: running TypeScript type check..."
+
+if ! pnpm exec tsc -b; then
+  echo "" >&2
+  echo "pre-push: TypeScript type check failed." >&2
+  echo "          Fix all type errors before pushing." >&2
+  exit 1
+fi
+
+echo "pre-push: type check passed."

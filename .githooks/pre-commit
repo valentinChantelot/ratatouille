@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ ! -x node_modules/.bin/lint-staged ]]; then
+  echo "pre-commit: lint-staged not found — run 'pnpm install' first" >&2
+  exit 1
+fi
+
+pnpm exec lint-staged
