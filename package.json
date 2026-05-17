@@ -21,13 +21,19 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,css}": "biome check --write"
+  },
   "devDependencies": {
     "@biomejs/biome": "^2.4.14",
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
     "@types/node": "^24.12.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "globals": "^17.6.0",
+    "lint-staged": "^17.0.4",
     "typescript": "~6.0.2",
     "vite": "^8.0.12"
   }

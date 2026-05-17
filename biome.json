@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.14/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -86,19 +86,18 @@
               },
 
               {
-                "selector": { "kind": "function" },
+                "selector": { "kind": "variable" },
                 "match": "use[A-Z][a-zA-Z0-9]*",
                 "formats": ["camelCase"]
               },
               {
                 "selector": { "kind": "variable" },
-                "match": "use[A-Z][a-zA-Z0-9]*",
-                "formats": ["camelCase"]
+                "match": "[A-Z][a-zA-Z0-9]*",
+                "formats": ["PascalCase"]
               },
-
               {
-                "selector": { "kind": "function" },
-                "formats": ["camelCase", "PascalCase"]
+                "selector": { "kind": "variable" },
+                "formats": ["camelCase", "CONSTANT_CASE"]
               },
 
               {
@@ -139,9 +138,14 @@
       }
     }
   },
+  "css": {
+    "formatter": {
+      "quoteStyle": "double"
+    }
+  },
   "javascript": {
     "formatter": {
-      "quoteStyle": "single",
+      "quoteStyle": "double",
       "trailingCommas": "all",
       "semicolons": "always",
       "arrowParentheses": "always",
