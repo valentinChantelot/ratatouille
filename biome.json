@@ -63,19 +63,12 @@
                 "selector": { "kind": "typeParameter" },
                 "formats": ["PascalCase"]
               },
-              {
-                "selector": { "kind": "enum" },
-                "formats": ["PascalCase"]
-              },
+              { "selector": { "kind": "enum" }, "formats": ["PascalCase"] },
               {
                 "selector": { "kind": "enumMember" },
                 "formats": ["CONSTANT_CASE"]
               },
-
-              {
-                "selector": { "kind": "class" },
-                "formats": ["PascalCase"]
-              },
+              { "selector": { "kind": "class" }, "formats": ["PascalCase"] },
               {
                 "selector": { "kind": "classProperty" },
                 "formats": ["camelCase"]
@@ -83,26 +76,6 @@
               {
                 "selector": { "kind": "classMethod" },
                 "formats": ["camelCase"]
-              },
-
-              {
-                "selector": { "kind": "variable" },
-                "match": "use[A-Z][a-zA-Z0-9]*",
-                "formats": ["camelCase"]
-              },
-              {
-                "selector": { "kind": "variable" },
-                "match": "[A-Z][a-zA-Z0-9]*",
-                "formats": ["PascalCase"]
-              },
-              {
-                "selector": { "kind": "variable" },
-                "formats": ["camelCase", "CONSTANT_CASE"]
-              },
-
-              {
-                "selector": { "kind": "variable" },
-                "formats": ["PascalCase", "camelCase", "CONSTANT_CASE"]
               }
             ]
           }
@@ -126,12 +99,18 @@
         "useSimplifiedLogicExpression": "warn"
       },
       "performance": {
-        "noDelete": "warn"
+        "noDelete": "error"
       },
       "a11y": {
         "useAltText": "error",
         "useButtonType": "error",
-        "noAutofocus": "warn"
+        "noAutofocus": "warn",
+        "useAriaPropsForRole": "error",
+        "noAriaHiddenOnFocusable": "error",
+        "useValidAriaRole": "error",
+        "noPositiveTabindex": "error",
+        "useKeyWithClickEvents": "error",
+        "useKeyWithMouseEvents": "error"
       },
       "security": {
         "noDangerouslySetInnerHtml": "error"
