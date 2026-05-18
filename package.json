@@ -14,7 +14,8 @@
     "check": "biome check --write .",
     "lint": "biome lint .",
     "format": "biome format --write .",
-    "prepare": "[ -d .git ] && git config core.hooksPath .githooks || true"
+    "prepare": "[ -d .git ] && git config core.hooksPath .githooks || true",
+    "init": "node scripts/init.mjs"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.100.9",
