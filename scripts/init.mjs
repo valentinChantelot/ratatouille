@@ -14,6 +14,8 @@ const ask = (q) => new Promise((res) => rl.question(q, res))
 async function main() {
   console.log('\nRatatouille init\n')
 
+  const projectName = (await ask('Project name: ')).trim()
+
   applyGitConfig()
 
   const features = []
@@ -32,6 +34,7 @@ async function main() {
     await mod.setup(ROOT)
   }
 
+  updateReadme(ROOT, projectName)
   cleanup()
 
   console.log('\nDone. Commit the result: git add -A && pnpm run commit\n')
@@ -50,12 +53,22 @@ function applyGitConfig() {
   console.log('Git config applied.')
 }
 
+function updateReadme(root, name) {
+  const readmePath = resolve(root, 'README.md')
+  let content = readFileSync(readmePath, 'utf-8')
+  content = content.replace(/^# .+$/m, `# ${name}`)
+  content = content.replace(/## Init[\s\S]*?(?=## Commands)/, '')
+  writeFileSync(readmePath, content)
+  console.log('README updated.')
+}
+
 function cleanup() {
   const pkgPath = resolve(ROOT, 'package.json')
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'))
   delete pkg.scripts.init
   writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`)
   rmSync(resolve(ROOT, 'scripts'), { recursive: true, force: true })
+  rmSync(resolve(ROOT, 'assets'), { recursive: true, force: true })
   console.log('Init scripts removed.')
 }
 
