@@ -1,4 +1,7 @@
 # Ratatouille
+>Yet another boilerplate repository.
+
+![ratatouille banner](./assets/repo-banner.png)
 
 ## Prerequisites
 
@@ -84,7 +87,7 @@ type(scope): short description
 Rules:
 - Description in lowercase, no trailing period
 - Scope is optional but recommended
-- `BREAKING CHANGE:` in the footer triggers a major version bump
+- `BREAKING CHANGE:` in the footer
 
 ### Automatic hooks
 
