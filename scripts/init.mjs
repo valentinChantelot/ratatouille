@@ -43,28 +43,30 @@ async function main() {
     ["Project", projectName],
     ["Git config", "applied"],
     ["Features", featuresSummary],
-    ["README", "updated"],
-    ["Scripts", "removed"],
-    ["Assets", "removed"],
+    ["README", "clean README from ratatouille specific content"],
+    ["Scripts", "init scripts folder removed"],
+    ["Assets", "ratatouille assets folder removed"],
   ];
   const colWidth = Math.max(...rows.map(([, v]) => v.length));
   const line = `├──────────────┬${"─".repeat(colWidth + 2)}┤`;
   const row = ([k, v]) => `│ ${k.padEnd(12)} │ ${v.padEnd(colWidth)} │`;
   const width = 16 + colWidth;
   const hasCzg = features.includes("commit-cli");
-  const commitCmd = hasCzg ? "pnpm run commit" : "git commit";
   const tip = hasCzg
-    ? "  Tip: use pnpm run commit to write conventional commits\n"
+    ? "Tip: use pnpm run commit to write conventional commits"
     : "";
   log(`
-┌${"─".repeat(width)}┐
-│${"  Init complete".padEnd(width)} │
+┌${"─".repeat(width + 1)}┐
+│${"Init complete".padEnd(width)} │
 ${line}
 ${rows.map(row).join("\n")}
 └──────────────┴${"─".repeat(colWidth + 2)}┘
-  Ratatouille is now ${projectName} !
-${tip}  Next: git add -A && ${commitCmd}
-  You can start working 🎉
+
+  ${tip}
+  \n
+  \n
+  Ratatouille is dead, long live ${projectName} !\n
+  Next: commit these changes and you can start working ! 🎉
 `);
 }
 
