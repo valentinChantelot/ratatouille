@@ -1,31 +1,34 @@
-import { execSync } from 'node:child_process'
-import { readFileSync, writeFileSync, existsSync, chmodSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { execSync } from "node:child_process";
+import { chmodSync, existsSync, readFileSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+const log = (msg) => process.stdout.write(`${msg}\n`);
 
 export async function setup(root) {
-  console.log('Setting up changelog (git-cliff)...')
+  log("Setting up changelog (git-cliff)...");
 
-  execSync('pnpm add -D git-cliff', { cwd: root, stdio: 'inherit' })
+  execSync("pnpm add -D git-cliff", { cwd: root, stdio: "inherit" });
 
-  writeFileSync(resolve(root, 'cliff.toml'), CLIFF_TOML)
-  console.log('  cliff.toml created')
+  writeFileSync(resolve(root, "cliff.toml"), CLIFF_TOML);
+  log("  cliff.toml created");
 
-  if (!existsSync(resolve(root, 'CHANGELOG.md'))) {
-    writeFileSync(resolve(root, 'CHANGELOG.md'), '# Changelog\n')
-    console.log('  CHANGELOG.md created')
+  if (!existsSync(resolve(root, "CHANGELOG.md"))) {
+    writeFileSync(resolve(root, "CHANGELOG.md"), "# Changelog\n");
+    log("  CHANGELOG.md created");
   }
 
-  const hookPath = resolve(root, '.githooks/pre-merge-commit')
-  writeFileSync(hookPath, PRE_MERGE_HOOK)
-  chmodSync(hookPath, '755')
-  console.log('  pre-merge-commit hook added')
+  const hookPath = resolve(root, ".githooks/pre-merge-commit");
+  writeFileSync(hookPath, PRE_MERGE_HOOK);
+  chmodSync(hookPath, "755");
+  log("  pre-merge-commit hook added");
 
-  const pkgPath = resolve(root, 'package.json')
-  const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'))
-  pkg.scripts.changelog = 'git-cliff -o CHANGELOG.md'
-  pkg.scripts['changelog:unreleased'] = 'git-cliff --unreleased -o CHANGELOG.md'
-  writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`)
-  console.log('  scripts added: changelog, changelog:unreleased')
+  const pkgPath = resolve(root, "package.json");
+  const pkg = JSON.parse(readFileSync(pkgPath, "utf-8"));
+  pkg.scripts.changelog = "git-cliff -o CHANGELOG.md";
+  pkg.scripts["changelog:unreleased"] =
+    "git-cliff --unreleased -o CHANGELOG.md";
+  writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`);
+  log("  scripts added: changelog, changelog:unreleased");
 }
 
 const CLIFF_TOML = `[changelog]
@@ -57,11 +60,14 @@ commit_parsers = [
   { message = "^perf", group = "Performance" },
   { message = "^refactor", group = "Refactoring" },
   { message = "^docs", group = "Documentation" },
-  { message = "^chore|^ci|^build|^test", skip = true },
+  { message = "^test", group = "Tests" },
+  { message = "^chore", group = "Chores" },
+  { message = "^ci", group = "CI/CD" },
+  { message = "^build", group = "Build" },
 ]
 tag_pattern = "v[0-9].*"
 sort_commits = "oldest"
-`
+`;
 
 const PRE_MERGE_HOOK = `#!/usr/bin/env bash
 set -euo pipefail
@@ -71,4 +77,4 @@ if ! git diff --name-only "$(git merge-base HEAD MERGE_HEAD)" MERGE_HEAD | grep 
   echo "                  Run 'pnpm run changelog' to generate it." >&2
   exit 1
 fi
-`
+`;
