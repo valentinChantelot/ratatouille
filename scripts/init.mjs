@@ -64,7 +64,6 @@ ${rows.map(row).join("\n")}
 
   ${tip}
   \n
-  \n
   Ratatouille is dead, long live ${projectName} !\n
   Next: commit these changes and you can start working ! 🎉
 `);
